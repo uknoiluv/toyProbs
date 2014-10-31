@@ -622,3 +622,30 @@ function solution(S) {
     return stack.length === 0 ? 1 : 0;
     // write your code in JavaScript (ECMA-262, 5th edition)
 }
+
+
+
+/*====================================
+ Nesting
+=====================================*/
+
+
+// you can use console.log for debugging purposes, i.e.
+// console.log('this is a debug message');
+
+function solution(S) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var stack = [];
+    var i;
+    for(i = 0; i < S.length; i++){
+        if(S[i] === '('){
+            stack.push(true)
+        }else{
+            var poped = stack.pop();
+            if(poped === undefined){
+                return 0;
+            }
+        } 
+    }
+    return stack.length === 0 ? 1 : 0;
+}
