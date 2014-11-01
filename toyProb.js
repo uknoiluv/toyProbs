@@ -649,3 +649,33 @@ function solution(S) {
     }
     return stack.length === 0 ? 1 : 0;
 }
+
+
+/*====================================
+ StoneWall
+=====================================*/
+
+function solution(H) {
+    var stack = [];
+    var count = 1;
+    for(var i = 0; i < H.length - 1; i++){
+      i === 0 ? stack.push(H[i]) : null;
+      if(H[i] !== H[i + 1]){
+          if(H[i] > H[i + 1]){
+            stack.pop()
+            if(stack.indexOf(H[i + 1]) !== -1){
+              count--;    
+            }else{
+              stack.push(H[i + 1]);
+            }
+          }else{
+            //stack = [];
+            //H[i - 1] || 0 > H[i] ? stack = [] : null;
+            stack.push(H[i + 1]);
+          }
+          count++;    
+      }
+    }
+    return count;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
