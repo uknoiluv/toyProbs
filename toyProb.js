@@ -655,6 +655,7 @@ function solution(S) {
  StoneWall
 =====================================*/
 
+
 function solution(H) {
     var stack = [];
     var count = 1;
@@ -675,6 +676,39 @@ function solution(H) {
           }
           count++;    
       }
+    }
+    return count;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
+
+function solution(H) {
+    var stack = [H[0]];
+    var count = 1;
+    var num = H[0];
+    var down = false;
+    for(var i = 1; i < H.length; i++){ 
+        if(H[i] > num){
+          down ? stack = [] : null;
+          down = false;
+          stack.push(H[i]);
+          count++;
+        }else if(H[i] < num){
+          stack.pop();
+          var loc = stack.indexOf(H[i]);
+          if(loc === -1){
+            var j = 0;
+            while(stack[j] < H[i]){
+              j++;
+            }
+            count++;
+            stack = stack.slice(0, j);
+          }else{
+            stack = stack.slice(0, loc);
+          }
+          down === false ? stack.push(H[i]) : null;
+          down = true;
+        }
+        num = H[i];
     }
     return count;
     // write your code in JavaScript (ECMA-262, 5th edition)
