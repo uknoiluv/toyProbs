@@ -713,3 +713,24 @@ function solution(H) {
     return count;
     // write your code in JavaScript (ECMA-262, 5th edition)
 }
+
+function solution(H) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var stack = [H[0]];
+    var count = 1;
+    for(var i = 0; i < H.length; i++){
+        if(H[i] < H[i + 1]){
+            stack.push(H[i + 1]);
+            count++;
+        }else if(H[i] > H[i + 1]){
+            stack.pop();
+            while(stack[stack.length - 1] > H[i + 1]){
+                stack.pop();
+            }
+            stack[stack.length - 1] === H[i + 1] ? count-- : null;
+            stack.push(H[i + 1]);
+            count++;
+        }
+    }
+    return count;
+}
