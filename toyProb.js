@@ -734,3 +734,35 @@ function solution(H) {
     }
     return count;
 }
+
+
+/*====================================
+ Fish
+=====================================*/
+
+function solution(A, B) {
+    var Alen = A.length;
+    for(var i = Alen - 2; i >= 0; i--){
+        if(B[i] === 1){
+            var stop = false;
+            var j = 1;
+            while(!stop){
+                if(B[i + j] === 1){
+                  j++;
+                }else if(A[i + j] === undefined){
+                  stop = true;
+                }else if(A[i] > A[i + j] && B[i + j] === 0){
+                  A.splice(i + j, 1);
+                  B.splice(i + j, 1);
+                }else if(A[i] < A[i + j] && B[i + j] === 0){
+                  A.splice(i, 1);
+                  B.splice(i, 1);
+                  stop = true;
+                }
+            }
+        }
+    }
+    return A.length;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
+
