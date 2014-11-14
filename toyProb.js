@@ -740,6 +740,7 @@ function solution(H) {
  Fish
 =====================================*/
 
+
 function solution(A, B) {
     var Alen = A.length;
     for(var i = Alen - 2; i >= 0; i--){
@@ -760,6 +761,67 @@ function solution(A, B) {
                   stop = true;
                 }
             }
+        }
+    }
+    return A.length;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
+
+function solution(A, B) {
+    var Alen = A.length;
+    var oneWay = false;
+    for(var i = Alen - 2; i >= 0; i--){
+        if(B[i] === 1){
+            var stop = false;
+            var j = 1;
+            while(!stop && !oneWay){
+                if(B[i + j] === 1){
+                  j++;
+                  oneWay = true;
+                }else if(A[i + j] === undefined){
+                  stop = true;
+                }else if(A[i] > A[i + j] && B[i + j] === 0){
+                  A.splice(i + j, 1);
+                  B.splice(i + j, 1);
+                }else if(A[i] < A[i + j] && B[i + j] === 0){
+                  A.splice(i, 1);
+                  B.splice(i, 1);
+                  oneWay = false;
+                  stop = true;
+                }
+            }
+        }
+    }
+    return A.length;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
+
+
+function solution(A, B) {
+    var Alen = A.length;
+    var oneWay = false;
+    for(var i = Alen - 2; i >= 0; i--){
+        if(B[i] === 1){
+            var stop = false;
+            var j = 1;
+            while(!stop && !oneWay){
+                if(B[i + j] === 1){
+                  j++;
+                  oneWay = true;
+                }else if(A[i + j] === undefined){
+                  stop = true;
+                }else if(A[i] > A[i + j] && B[i + j] === 0){
+                  A.splice(i + j, 1);
+                  B.splice(i + j, 1);
+                }else if(A[i] < A[i + j] && B[i + j] === 0){
+                  A.splice(i, 1);
+                  B.splice(i, 1);
+                  oneWay = false;
+                  stop = true;
+                }
+            }
+        }else{
+            oneWay = false;
         }
     }
     return A.length;
