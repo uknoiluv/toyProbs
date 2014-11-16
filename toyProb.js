@@ -828,3 +828,24 @@ function solution(A, B) {
     // write your code in JavaScript (ECMA-262, 5th edition)
 }
 
+
+
+/*====================================
+ Dominator
+=====================================*/
+
+
+function solution(A) {
+    var Alen = A.length;
+    var AlenHalf = Alen / 2;
+    var storage = {};
+    for(var i = 0; i < Alen; i++){
+        storage[A[i]] = storage[A[i]] || 0;
+        storage[A[i]]++;
+        if(AlenHalf < storage[A[i]]){
+            return i;
+        }
+    }
+    return -1;
+    // write your code in JavaScript (ECMA-262, 5th edition)
+}
