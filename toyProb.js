@@ -849,3 +849,41 @@ function solution(A) {
     return -1;
     // write your code in JavaScript (ECMA-262, 5th edition)
 }
+
+
+/*====================================
+ EquiLeader
+=====================================*/
+
+// you can use console.log for debugging purposes, i.e.
+// console.log('this is a debug message');
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var leaderArr = [];
+    var leader = {val: undefined, count: undefined};
+    var count = {};
+    var result = 0;
+    var Alen = A.length;
+    for(var i = 0; i < Alen - 1; i++){
+        count[A[i]] = count[A[i]] || 0;
+        count[A[i]]++;
+        if(count[A[i]] > ((i + 1) / 2)){
+          leader.val = A[i];   
+          leader.count = count[A[i]];
+        }
+        leader.count > ((i + 1) / 2) ? leaderArr.push(leader): leaderArr.push(undefined);
+    }
+    leader = {val: undefined, count: undefined};
+    count = {};
+    for(var j = Alen; j > 0; j--){
+        count[A[j]] = count[A[j]] || 0;
+        count[A[j]]++;
+        if(count[A[j]] > ((Alen - j + 1) / 2)){
+          leader = A[i];   
+        }
+        leader = leader || A[i];
+        leader === leaderArr[Alen - j] ? result++ : null;
+    }
+    return result;
+}
