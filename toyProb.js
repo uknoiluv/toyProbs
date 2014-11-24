@@ -887,3 +887,51 @@ function solution(A) {
     }
     return result;
 }
+
+
+/*====================================
+ MaxProfit
+=====================================*/
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var Alen = A.length;
+    var min = A[0];
+    var profit = 0;
+    for(var i = 1; i < Alen; i++){
+        min > A[i] ? min = A[i] : null;
+        profit < A[i] - min ? profit = A[i] - min : null;
+    }
+    return profit;
+}
+
+
+/*====================================
+ MaxDoubleSliceSum
+=====================================*/
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var sum;
+    var max = 0;
+    var Alen = A.length;
+    for(var i = 1; i < Alen - 1; i++){
+        if(sum === undefined && A[i] > 0){
+            sum = sum || 0;
+            sum += A[i];
+            min = A[i];
+            sum -= min;
+        }else if(sum >= 0){
+            sum += A[i];
+            if(A[i] < min){
+                sum += min;
+                min = A[i];
+                sum -= min;
+            }
+        }else{
+            sum = 0;
+        }
+        sum > max ? max = sum : null;
+    }
+    return max;
+}
