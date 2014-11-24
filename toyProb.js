@@ -914,6 +914,7 @@ function solution(A) {
     // write your code in JavaScript (ECMA-262, 5th edition)
     var sum;
     var max = 0;
+    var min;
     var Alen = A.length;
     for(var i = 1; i < Alen - 1; i++){
         if(sum === undefined && A[i] > 0){
