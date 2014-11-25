@@ -936,3 +936,33 @@ function solution(A) {
     }
     return max;
 }
+
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var sum;
+    var max = 0;
+    var min = 0;
+    var Alen = A.length;
+    for(var i = 1; i < Alen - 1; i++){
+        if(sum === undefined && A[i] > 0){
+            sum = sum || 0;
+            sum += A[i];
+            min = A[i];
+            sum -= min;
+        }else if(sum >= 0){
+            sum += A[i];
+            if(A[i] < min){
+                sum += min;
+                min = A[i];
+                sum -= min;
+            }
+        }else if(A[i] > 0){
+            sum += A[i];
+        }else{
+            sum = 0;
+        }
+        sum > max ? max = sum : null;
+    }
+    return max;
+}
