@@ -961,8 +961,87 @@ function solution(A) {
             sum += A[i];
         }else{
             sum = 0;
+            min = 0;
         }
         sum > max ? max = sum : null;
     }
     return max;
+}
+
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var sum;
+    var max = 0;
+    var min = 0;
+    var Alen = A.length;
+    for(var i = 1; i < Alen - 1; i++){
+        if(sum === undefined && A[i] > 0){
+            sum = sum || 0;
+            sum += A[i];
+            min = A[i];
+            sum -= min;
+        }else if(sum >= 0){
+            sum += A[i];
+            if(A[i] < min){
+                sum += min;
+                min = A[i];
+                sum -= min;
+            }
+        }else if(A[i] > 0){
+            sum += A[i];
+        }else{
+            sum = 0;
+            min = 0;
+        }
+        sum > max ? max = sum : null;
+    }
+    return max;
+}
+
+
+
+/*====================================
+ MinPerimeterRectangle
+=====================================*/
+
+
+function solution(N) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var result = 2 * ( 1 + N);
+    for(var i = 1; i <= N; i++){
+        if(N % i === 0){
+            var perimeter = 2 * (i + N / i);
+            perimeter < result ? result = perimeter : null;
+        }
+    }
+    return result;
+}
+
+
+function solution(N) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var result = 2 * ( 1 + N);
+    var max = Math.floor(Math.sqrt(N));
+    for(var i = max; i > 0; i--){
+        if(N % i === 0){
+            var perimeter = 2 * (i + N / i);            
+            if(perimeter < result){
+              return perimeter;
+            }
+        }
+    }
+    return result;
+}
+
+
+
+function solution(N) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var max = Math.floor(Math.sqrt(N));
+    for(var i = max; i > 0; i--){
+        if(N % i === 0){       
+            return 2 * (i + N / i);
+        }
+    }
 }
