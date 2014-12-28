@@ -1045,3 +1045,20 @@ function solution(N) {
         }
     }
 }
+
+
+
+/*====================================
+ CountFactors
+=====================================*/
+
+function solution(N) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var sqrtN = Math.floor(Math.sqrt(N));
+    var count = 2;
+    for(var i = 2; i <= sqrtN; i++){
+        N % i === 0 ? count += 2 : null;
+    }
+    sqrtN * sqrtN === N ? count-- : null;
+    return count;
+}
