@@ -1062,3 +1062,32 @@ function solution(N) {
     sqrtN * sqrtN === N ? count-- : null;
     return count;
 }
+
+
+
+/*====================================
+ Peaks
+=====================================*/
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var Alen = A.length - 1;
+    var peak = [];
+    for(var i = 1; i < Alen; i++){
+        A[i - 1] < A[i] && A[i] > A[i + 1] ? peak.push(i) : null;
+    }
+    var peakLen = peak.length;
+    if(peakLen === 0){
+        return 0;
+    }
+    var divisor = Math.ceil((Alen + 1) / peakLen);
+    var start = peak[0] > divisor ? peak[0] : divisor;
+    for(var j = start; j < Alen; j++){
+        if((Alen + 1) % start === 0){
+            for(var k = 0; k < peakLen; k++){
+                
+            }
+        }           
+    }    
+}
+
