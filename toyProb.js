@@ -1091,3 +1091,38 @@ function solution(A) {
     }    
 }
 
+
+
+function solution(A) {
+    // write your code in JavaScript (ECMA-262, 5th edition)
+    var Alen = A.length - 1;
+    var peak = [];
+    var found = false;
+    for(var i = 1; i < Alen; i++){
+        A[i - 1] < A[i] && A[i] > A[i + 1] ? peak.push(i) : null;
+    }
+    var peakLen = peak.length;
+    if(peakLen === 0){
+        return 0;
+    }
+    var divisor = Math.ceil((Alen + 1) / peakLen);
+    var check = peak[0] > divisor ? peak[0] : divisor;
+    Alen++;
+    while(check <= Alen && !found){
+      if(Alen % check === 0){        
+          var j = 0;
+          var k = 0;
+          while(Math.floor(peak[j] / check) === k || Math.floor(peak[j] / check) === k - 1){
+              if(Math.floor(peak[j] / check) === k){
+                k++;
+              }
+              j++;
+              if(k === Alen / check){
+                  found = true;
+              }
+          }
+      }
+      check++;
+    }
+    return Alen / (check - 1);
+}
