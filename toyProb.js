@@ -1126,3 +1126,219 @@ function solution(A) {
     }
     return Alen / (check - 1);
 }
+
+
+/*====================================
+ Flags
+=====================================*/
+
+
+// you can use console.log for debugging purposes, i.e.
+// console.log('this is a debug message');
+
+function solution(A) {
+    // write your code in JavaScript (Node.js)
+    var Alen = A.length;
+    var peak = [];
+    for(var i = 1; i < Alen - 1; i++){        
+        if(A[i - 1] < A[i] && A[ i ] > A[i + 1]){
+           peak.push(i)
+           i++;
+        }
+    }
+    console.log(peak);
+    var peakLen = peak.length;
+    var flags = peakLen;
+    var found = false;
+    while(flags > 1 && !found){
+      
+    }
+}
+
+function solution(A) {
+    // write your code in JavaScript (Node.js)    
+    var Alen = A.length;
+    var peak = [];
+    for(var i = 1; i < Alen - 1; i++){        
+        if(A[i - 1] < A[i] && A[ i ] > A[i + 1]){
+           peak.push(i);
+           i++;
+        }
+    }
+    var dist = [];
+    for(var j = 1; j < Alen; j++){
+        dist.push(peak[j] - peak[j - 1]);
+    }
+    var peakLen = peak.length;
+    var sqrt = (Alen - 2 > 0) ? Math.floor(Math.sqrt(Alen - 2)) + 1 : Alen;
+    var count = sqrt > peakLen ? peakLen : sqrt;
+    if(count <= 1){
+      return count;
+    }
+    var found = false;
+    while(count > 1 && !found){
+      var point = count - 1;      
+      var k = 0;
+      var temp = 0;
+      while(point > 0 && dist[k] !== undefined && !found){        
+        if(dist[k] + temp >= count){
+          point--;
+          point === 0 ? found = true : null;
+          temp = 0;          
+        }else{
+          temp += dist[k];
+        }
+        k++        
+      }      
+      found ? null : count--;      
+    }
+    return count;    
+}
+
+
+function solution(A) {
+    // write your code in JavaScript (Node.js)    
+    var Alen = A.length;
+    var peak1 = undefined;
+    var peak2 = undefined;
+    var dist = [];    
+    for(var i = 1; i < Alen - 1; i++){        
+        if(A[i - 1] < A[i] && A[ i ] > A[i + 1]){
+           peak1 = peak2;
+           peak2 = i;
+           peak1 && peak2 ? dist.push(peak2 - peak1) : null;
+        }
+    }
+    var peakLen = dist.length + (dist.length || peak2 ? 1 : 0);
+    var sqrt = (Alen - 2 > 0) ? Math.floor(Math.sqrt(Alen - 2)) + 1 : Alen;
+    var count = sqrt > peakLen ? peakLen : sqrt;
+    if(count <= 1){
+      return count;
+    }
+    var found = false;
+    while(count > 1 && !found){
+      var point = count - 1;      
+      var k = 0;
+      var temp = 0;
+      while(point > 0 && dist[k] !== undefined && !found){        
+        if(dist[k] + temp >= count){
+          point--;
+          point === 0 ? found = true : null;
+          temp = 0;          
+        }else{
+          temp += dist[k];
+        }
+        k++        
+      }      
+      found ? null : count--;      
+    }
+    return count;    
+}
+
+
+/*====================================
+ CountSemiprimes
+=====================================*/
+
+
+// you can use console.log for debugging purposes, i.e.
+// console.log('this is a debug message');
+
+function solution(N, P, Q) {
+    // write your code in JavaScript (Node.js)
+    var arr1 = [];
+    var arr2 = [];
+    var arrStore = [];
+    var result = [];
+    var sqrN = Math.floor(Math.sqrt(N));
+    var pLen = P.length;
+    for(var i = 2; i <= N; i++){
+        arr1.push(i);
+        arr2.push(i);
+    }
+    var nSqr = Math.floor(Math.sqrt(N));    
+    var deleteNum = function(arr, n){
+        var j = n + 1;
+        while(arr[j] !== undefined){
+            if(arr[j] % arr[n] === 0){
+                arr.splice(j, 1);
+            }else{
+                j++;
+            }
+        }
+        return arr;
+    }    
+    var m = 0;
+    while(arr1[m] !== undefined){
+        if(arr1[m] <= sqrN ){
+          arr1 = deleteNum(arr1, m);    
+        }        
+        var l = 0;                
+        var found = false;
+        while(!found){
+            if(arr2[l] === arr1[m]){
+                found = true;
+                arr2.splice(l, 1);
+            }else{
+                l++;
+            }
+        }
+        m++;
+    }
+    var n = 0;
+    while(arr2[n] !== undefined){
+        if(arr2[n] <= Math.floor(N / 2)){
+            arr2 = deleteNum(arr2, n);    
+        }        
+        n++;
+    }
+    var p = 0;
+    var q = 0;
+    arr2.push(N + 1);
+    while(arr2[p] !== undefined){
+        var interval = arr2[p] - ( p > 0 ? arr2[p - 1] : 0);
+        for(var r = 0; r < interval; r++){
+            arrStore.push(q);
+        }
+        q++;
+        p++;
+    }
+    for(var s = 0; s < pLen; s++){
+         result.push(arrStore[Q[s]] - arrStore[P[s] - 1]);
+    }
+    return result;
+}
+
+
+
+// you can use console.log for debugging purposes, i.e.
+// console.log('this is a debug message');
+
+function solution(N, P, Q) {
+    // write your code in JavaScript (Node.js 0.12)
+    var numArr = [];
+    var semiPrimeAccArr = [];
+    var result = [];
+    var num = 0;
+    for(var i = 0; i <= N; i++){
+        i < 2 ? numArr.push(0) : numArr.push(1);
+    }
+    
+    var sieve = function(arr){
+        
+    }
+    
+    var prime = sieve(numArr);
+    var semiPrime = sieve(prime);
+    
+    for(var j = 0; j <= N; j++){
+        num += semiPrime[j];
+        semiPrimeAccArr.push(num);
+    }
+    
+    for(var k = 0; k < P.length; k++){
+        result.push(semiPrimeAccArr[Q[k]] - semiPrimeAccArr[P[k]]);
+    }
+    
+    return result;
+}
