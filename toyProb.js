@@ -1320,16 +1320,34 @@ function solution(N, P, Q) {
     var semiPrimeAccArr = [];
     var result = [];
     var num = 0;
+    var sqrtN = Math.floor(Math.sqrt(N));
+
     for(var i = 0; i <= N; i++){
         i < 2 ? numArr.push(0) : numArr.push(1);
     }
     
-    var sieve = function(arr){
-        
-    }
+    var sieve = function(arr, n, lim){        
+        if(arr[n] && n <= lim){
+            var x = 2;
+            while(n * x <= N){
+                arr[n * x] === 1 ? arr[n * x] -= 1 : null;
+                x++;
+            }
+            return sieve(arr, ++n, lim);
+        }else if(arr[n] === 0 && n <= lim){
+            return sieve(arr, ++n, lim);
+        }else{
+            return arr;        
+        }
+    };
     
-    var prime = sieve(numArr);
-    var semiPrime = sieve(prime);
+    var prime = sieve(numArr, 2, Math.floor(Math.sqrt(N)));
+
+    for(var l = 2; l <= N; l++){
+        prime[l] ? prime[l] = 0 : prime[l] = 1;
+    }
+
+    var semiPrime = sieve(prime, 4, Math.floor(N / 2));
     
     for(var j = 0; j <= N; j++){
         num += semiPrime[j];
@@ -1338,6 +1356,106 @@ function solution(N, P, Q) {
     
     for(var k = 0; k < P.length; k++){
         result.push(semiPrimeAccArr[Q[k]] - semiPrimeAccArr[P[k]]);
+    }
+    
+    return result;
+}
+
+
+function solution(N, P, Q) {
+    // write your code in JavaScript (Node.js 0.12)
+    var numArr = [];
+    var semiPrimeAccArr = [];
+    var result = [];
+    var num = 0;
+
+    for(var i = 0; i <= N; i++){
+        i < 2 ? numArr.push(0) : numArr.push(1);
+    }
+    
+    var sieve = function(arr, n, lim){        
+        if(arr[n] && n <= lim){
+            var x = 2;
+            while(n * x <= N){
+                arr[n * x] === 1 ? arr[n * x] -= 1 : null;
+                x++;
+            }
+            return sieve(arr, ++n, lim);
+        }else if(arr[n] === 0 && n <= lim){
+            return sieve(arr, ++n, lim);
+        }else{
+            return arr;        
+        }
+    };
+    
+    var prime = sieve(numArr, 2, Math.floor(Math.sqrt(N)));
+    
+    for(var l = 2; l <= N; l++){
+        prime[l] ? prime[l] = 0 : prime[l] = 1;
+    }
+    
+    var semiPrime = sieve(prime, 4, Math.floor(N / 2));
+    
+    for(var j = 0; j <= N; j++){
+        num += semiPrime[j];
+        semiPrimeAccArr.push(num);
+    }
+    
+    
+    for(var k = 0; k < P.length; k++){
+        result.push(semiPrimeAccArr[Q[k]] - semiPrimeAccArr[P[k] - 1]);
+    }
+    
+    return result;
+}
+
+
+function solution(N, P, Q) {
+    // write your code in JavaScript (Node.js 0.12)
+    var numArr = [];
+    var semiPrimeAccArr = [];
+    var result = [];
+    var num = 0;
+
+    for(var i = 0; i <= N; i++){
+        i < 2 ? numArr.push(0) : numArr.push(1);
+    }
+    
+    var sieve = function(arr, n, lim){        
+        if(arr[n] && n <= lim){
+            var x = 2;
+            while(n * x <= N){
+                arr[n * x] === 1 ? arr[n * x] -= 1 : null;
+                x++;
+            }
+            return sieve(arr, ++n, lim);
+        }else if(arr[n] === 0 && n <= lim){
+            var y = n + 1;
+            while(arr[y] === 0){
+              y++;
+            }
+            return sieve(arr, y, lim);
+        }else{
+            return arr;        
+        }
+    };
+    
+    var prime = sieve(numArr, 2, Math.floor(Math.sqrt(N)));
+    
+    for(var l = 2; l <= N; l++){
+        prime[l] ? prime[l] = 0 : prime[l] = 1;
+    }
+    
+    var semiPrime = sieve(prime, 4, Math.floor(N / 2));
+    
+    for(var j = 0; j <= N; j++){
+        num += semiPrime[j];
+        semiPrimeAccArr.push(num);
+    }
+    
+    
+    for(var k = 0; k < P.length; k++){
+        result.push(semiPrimeAccArr[Q[k]] - semiPrimeAccArr[P[k] - 1]);
     }
     
     return result;
